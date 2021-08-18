@@ -15,11 +15,11 @@ const searchTermsArr = searchTerms.split('\r\n');
 // Main
 async function main() {
 
-    const browser = await puppeteer.launch({ headless: false });
+    const browser = await puppeteer.launch();
 
     async function scrape(searchStr, resultNum) {
         let page = await browser.newPage();
-        await page.goto(`https://www.google.com/search?q=${searchStr}`, { waitUntil: 'load' });
+        await page.goto(`https://www.google.com/search?q=${searchStr}`, { waitUntil: 'load', timeout: 0 });
         const metaArr = await page.evaluate((resultNum) => {
             let metaArr = [];
             for (let i = 0; i < resultNum; i++) {
